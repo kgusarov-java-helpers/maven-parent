@@ -1,0 +1,1579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.kgusarov</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>public-artifacts</id>
+            <url>https://pkgs.dev.azure.com/konstantinsgusarovs/PublicProjects/_packaging/public-artifacts/maven/v1
+            </url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>public-artifacts</id>
+            <url>https://pkgs.dev.azure.com/konstantinsgusarovs/PublicProjects/_packaging/public-artifacts/maven/v1
+            </url>
+        </repository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:https://github.com/kgusarov-public-projects/maven-parent.git</connection>
+        <developerConnection>scm:git:https://github.com/kgusarov-public-projects/maven-parent.git</developerConnection>
+        <url>https://github.com/kgusarov-public-projects/maven-parent.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <!-- Java/Kotlin versions -->
+        <java.language.version>17</java.language.version>
+        <kotlin.language.version>2.0.0</kotlin.language.version>
+
+        <!-- JaCoCo -->
+        <jacoco.version>0.8.12</jacoco.version>
+
+        <!-- Maven props -->
+        <maven.compiler.source>${java.language.version}</maven.compiler.source>
+        <maven.compiler.target>${java.language.version}</maven.compiler.target>
+
+        <!-- File encodings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <file.encoding>UTF-8</file.encoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Test skipping -->
+        <skip.unit.tests>false</skip.unit.tests>
+        <skip.integration.tests>false</skip.integration.tests>
+
+        <!-- Code Scan skipping -->
+        <skip.code.scan>false</skip.code.scan>
+
+        <!-- Install skipping -->
+        <skip.maven.install>false</skip.maven.install>
+
+        <!-- Plugin versions -->
+        <plugin.kotlin.version>${kotlin.language.version}</plugin.kotlin.version>
+        <plugin.compiler.version>3.13.0</plugin.compiler.version>
+        <plugin.clean.version>3.4.0</plugin.clean.version>
+        <plugin.shade.version>3.6.0</plugin.shade.version>
+        <plugin.enforcer.version>3.5.0</plugin.enforcer.version>
+        <plugin.release.version>3.1.0</plugin.release.version>
+        <plugin.install.version>3.1.2</plugin.install.version>
+        <plugin.site.version>4.0.0-M15</plugin.site.version>
+        <plugin.deploy.version>3.1.2</plugin.deploy.version>
+        <plugin.jar.version>3.4.2</plugin.jar.version>
+        <plugin.versions.version>2.17.0</plugin.versions.version>
+        <plugin.surefire.version>3.3.0</plugin.surefire.version>
+        <plugin.failsafe.version>3.3.0</plugin.failsafe.version>
+        <plugin.jacoco.version>${jacoco.version}</plugin.jacoco.version>
+        <plugin.resources.version>3.3.1</plugin.resources.version>
+        <plugin.exec.version>3.3.0</plugin.exec.version>
+        <plugin.sonar.version>4.0.0.4121</plugin.sonar.version>
+        <plugin.dependency.version>3.7.1</plugin.dependency.version>
+        <plugin.azure.functions.version>1.36.0</plugin.azure.functions.version>
+        <plugin.antrun.version>3.1.0</plugin.antrun.version>
+        <plugin.ktlint.version>3.2.0</plugin.ktlint.version>
+        <plugin.checkstyle.version>3.4.0</plugin.checkstyle.version>
+        <plugin.pmd.version>3.24.0</plugin.pmd.version>
+        <plugin.spotbugs.version>4.8.6.2</plugin.spotbugs.version>
+
+        <!-- Spring -->
+        <spring.boot.version>3.3.1</spring.boot.version>
+        <spring.version>6.1.10</spring.version>
+        <spring.shell.version>2.1.4</spring.shell.version>
+
+        <!-- Logging -->
+        <slf4j.version>2.0.13</slf4j.version>
+        <logback.version>1.5.6</logback.version>
+        <log4j.version>2.23.1</log4j.version>
+        <liquibase.slf4j.version>5.0.0</liquibase.slf4j.version>
+        <jboss.logging.version>3.6.0.Final</jboss.logging.version>
+
+        <!-- DB -->
+        <liquibase.version>4.28.0</liquibase.version>
+        <postgresql.version>42.7.3</postgresql.version>
+        <mongodb.version>5.1.1</mongodb.version>
+        <hibernate.version>6.5.2.Final</hibernate.version>
+        <hazelcast.version>5.4.0</hazelcast.version>
+
+        <!-- Commons -->
+        <commons.math3.version>3.6.1</commons.math3.version>
+        <commons.lang3.version>3.14.0</commons.lang3.version>
+        <commons.text.version>1.12.0</commons.text.version>
+        <commons.io.version>2.16.1</commons.io.version>
+        <commons.codec.version>1.17.0</commons.codec.version>
+
+        <!-- POI -->
+        <poi.version>3.13</poi.version>
+
+        <!-- Spec -->
+        <jakarta.annotation.api.version>3.0.0</jakarta.annotation.api.version>
+        <jakarta.servlet.api.version>6.1.0</jakarta.servlet.api.version>
+        <jakarta.activation.api.version>2.1.3</jakarta.activation.api.version>
+        <cache.api.version>1.1.1</cache.api.version>
+
+        <!-- Utils -->
+        <guava.version>33.2.1-jre</guava.version>
+        <vavr.version>0.10.4</vavr.version>
+        <jackson.version>2.17.1</jackson.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <byte.buddy.version>1.14.17</byte.buddy.version>
+        <bcel.version>6.9.0</bcel.version>
+        <xmlbeans.version>3.0.0</xmlbeans.version>
+        <aspectjweaver.version>1.9.22.1</aspectjweaver.version>
+        <micrometer.version>1.13.1</micrometer.version>
+        <checker.qual.version>3.44.0</checker.qual.version>
+        <data.url.version>2.0.0</data.url.version>
+
+        <!-- Reactor -->
+        <projectreactor.version>3.6.7</projectreactor.version>
+
+        <!-- Test -->
+        <junit.version>5.11.0-M2</junit.version>
+        <equalsverifier.version>3.16.1</equalsverifier.version>
+        <mockito.version>5.12.0</mockito.version>
+        <mockito.kotlin.version>5.3.1</mockito.kotlin.version>
+        <hamcrest.version>2.2</hamcrest.version>
+        <testcontainers.version>1.19.8</testcontainers.version>
+        <assertj.version>3.26.0</assertj.version>
+
+        <!-- Misc -->
+        <spotbugs.annotations.version>4.8.6</spotbugs.annotations.version>
+        <lombok.version>1.18.34</lombok.version>
+        <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
+        <wildfly.common.version>2.0.0</wildfly.common.version>
+
+        <!-- Azure -->
+        <azure.functions.library.version>3.1.0</azure.functions.library.version>
+        <applicationinsights.version>3.5.3</applicationinsights.version>
+
+        <!-- Telegram -->
+        <telegrambots.version>7.5.0</telegrambots.version>
+        <kotlin.version>2.0.0</kotlin.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${plugin.kotlin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirs>
+                                    <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                                    <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                                </sourceDirs>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <goals>
+                                <goal>test-compile</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirs>
+                                    <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+                                    <sourceDir>${project.basedir}/src/test/java</sourceDir>
+                                </sourceDirs>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${plugin.compiler.version}</version>
+                    <executions>
+                        <execution>
+                            <id>default-compile</id>
+                            <phase>none</phase>
+                        </execution>
+                        <execution>
+                            <id>default-testCompile</id>
+                            <phase>none</phase>
+                        </execution>
+                        <execution>
+                            <id>java-compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>java-test-compile</id>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                    <configuration>
+                        <source>${java.language.version}</source>
+                        <target>${java.language.version}</target>
+                        <release>${java.language.version}</release>
+                        <compilerArgument>-Xlint:unchecked</compilerArgument>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                        <parameters>true</parameters>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok-mapstruct-binding</artifactId>
+                                <version>${lombok.mapstruct.binding.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.springframework.boot</groupId>
+                                <artifactId>spring-boot-configuration-processor</artifactId>
+                                <version>${spring.boot.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${plugin.shade.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${plugin.clean.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.microsoft.azure</groupId>
+                    <artifactId>azure-functions-maven-plugin</artifactId>
+                    <version>${plugin.azure.functions.version}</version>
+
+                    <executions>
+                        <execution>
+                            <id>package-functions</id>
+                            <goals>
+                                <goal>package</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${plugin.enforcer.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <configuration>
+                                <rules>
+                                    <dependencyConvergence/>
+                                    <requirePluginVersions/>
+                                    <bannedDependencies>
+                                        <excludes>
+                                            <exclude>org.apache.tomcat.embed:*</exclude>
+                                            <exclude>org.apache.logging.log4j:log4j-core</exclude>
+                                        </excludes>
+                                    </bannedDependencies>
+                                </rules>
+                            </configuration>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${plugin.release.version}</version>
+
+                    <configuration>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
+                        <checkModificationExcludes>
+                            <checkModificationExclude>mvnw</checkModificationExclude>
+                            <checkModificationExclude>mvnw.cmd</checkModificationExclude>
+                        </checkModificationExcludes>
+                        <scmCommentPrefix>[skip ci]</scmCommentPrefix>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${plugin.install.version}</version>
+
+                    <configuration>
+                        <skip>${skip.maven.install}</skip>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${plugin.site.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${plugin.deploy.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${plugin.jar.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${plugin.dependency.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${plugin.antrun.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.github.gantsign.maven</groupId>
+                    <artifactId>ktlint-maven-plugin</artifactId>
+                    <version>${plugin.ktlint.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${plugin.checkstyle.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${plugin.pmd.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${plugin.spotbugs.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${plugin.versions.version}</version>
+                    <configuration>
+                        <allowSnapshots>true</allowSnapshots>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${plugin.surefire.version}</version>
+                    <configuration>
+                        <skipTests>${skip.unit.tests}</skipTests>
+                        <excludes>
+                            <exclude>**/*IntegrationTest*.java</exclude>
+                        </excludes>
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                        <!--suppress MavenModelInspection -->
+                        <argLine>${surefire.argLine} -Xms1024m -Xmx2048m --add-exports
+                            java.base/jdk.internal.util.random=ALL-UNNAMED -XX:+EnableDynamicAgentLoading
+                        </argLine>
+                        <testFailureIgnore>false</testFailureIgnore>
+                        <reportsDirectory>${project.build.directory}/test-reports</reportsDirectory>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${plugin.failsafe.version}</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*IntegrationTest*.java</include>
+                        </includes>
+                        <useSystemClassLoader>false</useSystemClassLoader>
+                        <!--suppress MavenModelInspection -->
+                        <argLine>${failsafe.argLine} -Xms1024m -Xmx2048m --add-exports
+                            java.base/jdk.internal.util.random=ALL-UNNAMED -XX:+EnableDynamicAgentLoading
+                        </argLine>
+                        <reportsDirectory>${project.build.directory}/test-reports</reportsDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>integration-tests</id>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                            <configuration>
+                                <skipTests>${skip.integration.tests}</skipTests>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${plugin.jacoco.version}</version>
+
+                    <executions>
+                        <execution>
+                            <id>default-prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+
+                            <configuration>
+                                <skip>${skip.unit.tests}</skip>
+                                <append>true</append>
+                                <propertyName>surefire.argLine</propertyName>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>default-prepare-agent-integration</id>
+                            <goals>
+                                <goal>prepare-agent-integration</goal>
+                            </goals>
+
+                            <configuration>
+                                <skip>${skip.integration.tests}</skip>
+                                <append>true</append>
+                                <propertyName>failsafe.argLine</propertyName>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${plugin.resources.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${plugin.exec.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${plugin.sonar.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>code-module</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>run-ktlint</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.gantsign.maven</groupId>
+                        <artifactId>ktlint-maven-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <id>ktlint</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+
+                                <configuration>
+                                    <failOnViolation>true</failOnViolation>
+                                    <reporters>
+                                        <reporter>
+                                            <name>plain</name>
+                                        </reporter>
+                                    </reporters>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>run-checkstyle</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <id>checkstyle</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${skip.code.scan}</skip>
+                                    <consoleOutput>true</consoleOutput>
+                                    <checkstyleRules>
+                                        <module name="Checker">
+                                            <property name="charset" value="UTF-8"/>
+                                            <property name="severity" value="error"/>
+                                            <property name="fileExtensions" value="java, properties"/>
+
+                                            <module name="BeforeExecutionExclusionFileFilter">
+                                                <property name="fileNamePattern" value="module\-info\.java$"/>
+                                            </module>
+
+                                            <module name="BeforeExecutionExclusionFileFilter">
+                                                <property name="fileNamePattern" value=".*[\\/]target[\\/].*$"/>
+                                            </module>
+
+                                            <module name="FileTabCharacter"/>
+                                            <module name="NewlineAtEndOfFile"/>
+
+                                            <module name="RegexpSingleline">
+                                                <property name="format" value="((//.*)|(\*.*))FIXME"/>
+                                                <property name="message"
+                                                          value="TODO is preferred to FIXME."/>
+                                            </module>
+
+                                            <module name="RegexpSingleline">
+                                                <property name="format" value="((//.*)|(\*.*))TODO [^(]"/>
+                                                <property name="message"
+                                                          value="All TODOs should be named."/>
+                                            </module>
+
+                                            <module name="LineLength">
+                                                <property name="max" value="120"/>
+                                                <property name="ignorePattern"
+                                                          value="TODO is preferred to FIXME."/>
+                                            </module>
+
+                                            <module name="TreeWalker">
+                                                <module name="SuppressionCommentFilter">
+                                                    <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
+                                                    <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
+                                                    <property name="checkFormat" value="$1"/>
+                                                </module>
+
+                                                <module name="AvoidStarImport"/>
+                                                <module name="IllegalImport">
+                                                    <property name="regexp" value="true"/>
+                                                    <property name="illegalPkgs"
+                                                              value="^(com\.)?sun\.\w*, ^io.opentelemetry"/>
+                                                </module>
+                                                <module name="RedundantImport"/>
+                                                <module name="UnusedImports"/>
+
+                                                <module name="ConstantName"/>
+                                                <module name="LocalFinalVariableName"/>
+                                                <module name="LocalVariableName"/>
+                                                <module name="MemberName"/>
+                                                <module name="MethodName">
+                                                    <property name="format"
+                                                              value="(?=^[a-z][a-zA-Z0-9]*$)(?!^(?i)builder$)"/>
+                                                    <property name="applyToPrivate" value="false"/>
+                                                </module>
+                                                <module name="PackageName"/>
+                                                <module name="ParameterName"/>
+                                                <module name="StaticVariableName"/>
+                                                <module name="TypeName"/>
+
+                                                <module name="TypeNameCheck">
+                                                    <metadata name="altname" value="TypeName"/>
+                                                </module>
+
+                                                <module name="ConstantNameCheck">
+                                                    <metadata name="altname" value="ConstantName"/>
+                                                    <property name="applyToPublic" value="true"/>
+                                                    <property name="applyToProtected" value="true"/>
+                                                    <property name="applyToPackage" value="true"/>
+                                                    <property name="applyToPrivate" value="false"/>
+                                                    <property name="format"
+                                                              value="^([A-Z][A-Z0-9]*(_[A-Z0-9]+)*|FLAG_.*)$"/>
+                                                    <message key="name.invalidPattern"
+                                                             value="Variable ''{0}'' should be in ALL_CAPS (if it is a constant) or be private (otherwise)."/>
+                                                </module>
+
+                                                <module name="MissingDeprecated"/>
+
+                                                <module name="StaticVariableNameCheck">
+                                                    <metadata name="altname" value="StaticVariableName"/>
+                                                    <property name="applyToPublic" value="true"/>
+                                                    <property name="applyToProtected" value="true"/>
+                                                    <property name="applyToPackage" value="true"/>
+                                                    <property name="applyToPrivate" value="true"/>
+                                                    <property name="format" value="^[a-z][a-zA-Z0-9]*_?$"/>
+                                                </module>
+
+                                                <module name="MemberNameCheck">
+                                                    <metadata name="altname" value="MemberName"/>
+                                                    <property name="applyToPublic" value="true"/>
+                                                    <property name="applyToProtected" value="true"/>
+                                                    <property name="applyToPackage" value="true"/>
+                                                    <property name="applyToPrivate" value="true"/>
+                                                    <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+                                                </module>
+
+                                                <module name="MethodNameCheck">
+                                                    <metadata name="altname" value="MethodName"/>
+                                                    <property name="format"
+                                                              value="^[a-z][a-zA-Z0-9]*(_[a-zA-Z0-9]+)*$"/>
+                                                </module>
+
+                                                <module name="ParameterName"/>
+                                                <module name="LocalFinalVariableName"/>
+                                                <module name="LocalVariableName"/>
+                                                <module name="LeftCurly"/>
+
+                                                <module name="RightCurly">
+                                                    <property name="option" value="same"/>
+                                                </module>
+
+                                                <module name="NeedBraces">
+                                                    <property name="tokens"
+                                                              value="LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO"/>
+                                                </module>
+
+                                                <module name="UpperEll"/>
+
+                                                <module name="FallThrough">
+                                                    <property name="reliefPattern"
+                                                              value="fall through|Fall through|fallthru|Fallthru|falls through|Falls through|fallthrough|Fallthrough|No break|NO break|no break|continue on"/>
+                                                </module>
+
+                                                <module name="Indentation">
+                                                    <property name="basicOffset" value="4"/>
+                                                    <property name="braceAdjustment" value="0"/>
+                                                    <property name="caseIndent" value="4"/>
+                                                    <property name="throwsIndent" value="4"/>
+                                                    <property name="lineWrappingIndentation" value="4"/>
+                                                    <property name="arrayInitIndent" value="4"/>
+                                                </module>
+
+                                                <module name="EmptyForIteratorPad"/>
+                                                <module name="MethodParamPad"/>
+                                                <module name="NoWhitespaceAfter">
+                                                    <property name="tokens"
+                                                              value="INC,DEC,UNARY_MINUS,UNARY_PLUS,BNOT,LNOT,DOT,ARRAY_DECLARATOR,INDEX_OP"/>
+                                                </module>
+                                                <module name="NoWhitespaceBefore">
+                                                    <property name="tokens"
+                                                              value="COMMA,SEMI,POST_INC,POST_DEC,DOT,METHOD_REF,LABELED_STAT"/>
+                                                    <property name="allowLineBreaks" value="true"/>
+                                                </module>
+                                                <module name="OperatorWrap"/>
+                                                <module name="ParenPad"/>
+                                                <module name="TypecastParenPad"/>
+                                                <module name="WhitespaceAfter"/>
+                                                <module name="WhitespaceAround"/>
+                                                <module name="ModifierOrder"/>
+                                                <module name="RedundantModifier"/>
+                                                <module name="AvoidNestedBlocks"/>
+                                                <module name="EmptyBlock"/>
+                                                <module name="EmptyStatement"/>
+                                                <module name="EqualsHashCode"/>
+                                                <module name="IllegalInstantiation"/>
+                                                <module name="InnerAssignment"/>
+                                                <module name="MissingSwitchDefault"/>
+                                                <module name="SimplifyBooleanExpression"/>
+                                                <module name="SimplifyBooleanReturn"/>
+
+                                                <module name="FinalClass"/>
+                                                <module name="InterfaceIsType"/>
+                                                <module name="VisibilityModifier">
+                                                    <property name="protectedAllowed" value="true"/>
+                                                    <property name="packageAllowed" value="true"/>
+                                                </module>
+
+                                                <module name="ArrayTypeStyle"/>
+                                                <module name="FinalLocalVariable">
+                                                    <property name="tokens" value="VARIABLE_DEF,PARAMETER_DEF"/>
+                                                    <property name="validateEnhancedForLoopVariable" value="true"/>
+                                                </module>
+                                                <module name="FinalParameters"/>
+                                            </module>
+                                        </module>
+                                    </checkstyleRules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>run-pmd</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <id>pmd</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>pmd</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${skip.code.scan}</skip>
+                                    <targetJdk>${java.language.version}</targetJdk>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>check</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${skip.code.scan}</skip>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>run-spotbugs</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src/main</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <id>spotbugs</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${skip.code.scan}</skip>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>run-deploy</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <properties>
+                <!-- Test skipping -->
+                <skip.unit.tests>true</skip.unit.tests>
+                <skip.integration.tests>true</skip.integration.tests>
+
+                <!-- Code Scan skipping -->
+                <skip.code.scan>true</skip.code.scan>
+
+                <!-- Install skipping -->
+                <skip.maven.install>true</skip.maven.install>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>run-build</id>
+
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <properties>
+                <!-- Code Scan skipping -->
+                <skip.code.scan>true</skip.code.scan>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>kotlin-module-main</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src/main/kotlin</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-stdlib</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>kotlin-module-test</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src/test/kotlin</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-stdlib</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Kotlin -->
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib</artifactId>
+                <version>${kotlin.language.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib-jdk8</artifactId>
+                <version>${kotlin.language.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-reflect</artifactId>
+                <version>${kotlin.language.version}</version>
+            </dependency>
+
+            <!-- Spec -->
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${jakarta.servlet.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta.annotation.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.activation</groupId>
+                <artifactId>jakarta.activation-api</artifactId>
+                <version>${jakarta.activation.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.cache</groupId>
+                <artifactId>cache-api</artifactId>
+                <version>${cache.api.version}</version>
+            </dependency>
+
+            <!-- Commons -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>${commons.math3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${commons.text.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+
+            <!-- POI -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <!-- Utils -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr</artifactId>
+                <version>${vavr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jdk8</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-parameter-names</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-kotlin</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte.buddy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>${byte.buddy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.bcel</groupId>
+                <artifactId>bcel</artifactId>
+                <version>${bcel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.xmlbeans</groupId>
+                <artifactId>xmlbeans</artifactId>
+                <version>${xmlbeans.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-observation</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-core</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-commons</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.checkerframework</groupId>
+                <artifactId>checker-qual</artifactId>
+                <version>${checker.qual.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.maxschuster</groupId>
+                <artifactId>dataurl</artifactId>
+                <version>${data.url.version}</version>
+            </dependency>
+
+            <!-- Logging -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jul-to-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-to-slf4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>${jboss.logging.version}</version>
+            </dependency>
+
+            <!-- Liquibase -->
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mattbertolini</groupId>
+                <artifactId>liquibase-slf4j</artifactId>
+                <version>${liquibase.slf4j.version}</version>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-json</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-batch</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring.boot.version}</version>
+
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-tomcat</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-undertow</artifactId>
+                <version>${spring.boot.version}</version>
+
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.tomcat.embed</groupId>
+                        <artifactId>tomcat-embed-el</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.shell</groupId>
+                <artifactId>spring-shell-table</artifactId>
+                <version>${spring.shell.version}</version>
+            </dependency>
+
+            <!-- DB -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>${mongodb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-reactivestreams</artifactId>
+                <version>${mongodb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.orm</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.orm</groupId>
+                <artifactId>hibernate-jcache</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast</artifactId>
+                <version>${hazelcast.version}</version>
+            </dependency>
+
+            <!-- Misc -->
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>${spotbugs.annotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly.common</groupId>
+                <artifactId>wildfly-common</artifactId>
+                <version>${wildfly.common.version}</version>
+            </dependency>
+
+            <!-- Azure -->
+            <dependency>
+                <groupId>com.microsoft.azure.functions</groupId>
+                <artifactId>azure-functions-java-library</artifactId>
+                <version>${azure.functions.library.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>applicationinsights-agent</artifactId>
+                <version>${applicationinsights.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>applicationinsights-core</artifactId>
+                <version>${applicationinsights.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>applicationinsights-web</artifactId>
+                <version>${applicationinsights.version}</version>
+            </dependency>
+
+
+            <!-- Telegram -->
+            <dependency>
+                <groupId>org.telegram</groupId>
+                <artifactId>telegrambots-client</artifactId>
+                <version>${telegrambots.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.telegram</groupId>
+                <artifactId>telegrambots-webhook</artifactId>
+                <version>${telegrambots.version}</version>
+            </dependency>
+
+            <!-- Test -->
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-test</artifactId>
+                <version>${projectreactor.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>nl.jqno.equalsverifier</groupId>
+                <artifactId>equalsverifier</artifactId>
+                <version>${equalsverifier.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.boot.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>mongodb</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-test-junit5</artifactId>
+                <version>${kotlin.language.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito.kotlin</groupId>
+                <artifactId>mockito-kotlin</artifactId>
+                <version>${mockito.kotlin.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+</project>
