@@ -1,6 +1,10 @@
 name: "Post Commit Hook"
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - main
+
 run-name: "[${{ github.sha }}] build"
 
 jobs:
