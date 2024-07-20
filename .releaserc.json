@@ -1,0 +1,27 @@
+{
+  "branches": [
+    {
+      "name": "main"
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    [
+      "@terrestris/maven-semantic-release",
+      {
+        "updateSnapshotVersion": true,
+        "processAllModules": true,
+        "settingsPath": "/home/runner/.m2/settings.xml"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "pom.xml"
+        ],
+        "message": "chore(release): ${nextRelease.version} [no ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
