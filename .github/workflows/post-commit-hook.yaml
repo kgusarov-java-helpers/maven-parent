@@ -10,3 +10,4 @@ run-name: "[${{ github.sha }}] build"
 jobs:
   run-build:
     uses: kgusarov-public-projects/cilib/.github/workflows/post-commit-hook.yaml@main
+    secrets: inherit
