@@ -9,4 +9,4 @@ run-name: "[${{ github.sha }}] build"
 
 jobs:
   run-build:
-    uses: kgusarov-public-projects/cilib/.github/workflows/workflow-1.yml
+    uses: kgusarov-public-projects/cilib/.github/workflows/post-commit-hook.yaml
