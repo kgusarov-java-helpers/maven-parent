@@ -3,7 +3,7 @@ name: "Post Commit Hook"
 on:
   push:
     branches-ignore:
-      - main
+    - main
 
 run-name: "[${{ github.sha }}] build"
 
