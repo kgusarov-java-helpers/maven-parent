@@ -577,7 +577,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>${java.language.version}</jvmTarget>
                 </configuration>
             </plugin>
         </plugins>
