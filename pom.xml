@@ -1471,6 +1471,13 @@
                 <version>${telegrambots.version}</version>
             </dependency>
 
+            <!-- Reactor -->
+            <dependency>
+                <groupId>io.projectreactor.netty</groupId>
+                <artifactId>reactor-netty</artifactId>
+                <version>${projectreactor.version}</version>
+            </dependency>
+
             <!-- Test -->
             <dependency>
                 <groupId>io.projectreactor</groupId>
