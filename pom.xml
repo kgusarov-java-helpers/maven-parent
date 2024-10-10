@@ -151,6 +151,7 @@
 
         <!-- Reactor -->
         <projectreactor.version>3.6.7</projectreactor.version>
+        <reactor-netty.version>1.1.22</reactor-netty.version>
 
         <!-- Test -->
         <junit.version>5.11.0-M2</junit.version>
@@ -1475,7 +1476,7 @@
             <dependency>
                 <groupId>io.projectreactor.netty</groupId>
                 <artifactId>reactor-netty</artifactId>
-                <version>${projectreactor.version}</version>
+                <version>${reactor-netty.version}</version>
             </dependency>
 
             <!-- Test -->
